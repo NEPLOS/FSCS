@@ -1,6 +1,19 @@
 #include <iostream>
+#include "../include/request.h"
 
 int main(int argc, char *argv[])
 {
     std::cout << "beeg boom" << std::endl;
+
+    Request req;
+
+   req.handleStartLine("GET /test HTTP/1.1\r\n");
+   req.parseEachLine("HOST: mozila");
+   req.parseEachLine("Accept: */*");
+   req.parseEachLine("Content-Length: 12");
+   req.parseEachLine("User-Agent: curl/8.6.0");
+
+
+   req.printHeader();
+
 }
