@@ -37,7 +37,7 @@ private:
 public:
     /*
         parse the request start line
-        @param reqest only the first line
+        @param request only the first line
     */
     void handleStartLine(std::string request);
     
@@ -52,5 +52,14 @@ public:
     
     // prints the map
     void printHeader();
+
+    /*
+    
+        @param buffer gets the stream buffer 
+        @return returns the remaining buffer
+
+    */
+    void parseBuffer(std::string& buffer);
+
     ~Request();
 };

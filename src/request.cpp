@@ -36,9 +36,7 @@ void Request::handleStartLine(std::string startLine)
             break;
         }
         
-        
         str.push_back(startLine[i]);
-
 
     }
     
@@ -52,6 +50,45 @@ void Request::parseEachLine(std::string headerLine)
 
    header[section] = data;
 
+
+}
+
+void Request::parseBuffer(std::string& buffer)
+{
+    int16_t num = 0;
+
+    while (true)
+    {
+        int16_t pos = buffer.find("\r\n");
+
+        if (pos == 0)
+        {
+            buffer = buffer.substr(pos + 2 , buffer.size() - 1);
+            break;
+        }
+        
+
+        if (pos == std::string::npos)
+        {
+            break;
+        }
+        
+
+        std::string section = buffer.substr(0 , pos);
+        if (num == 0)
+        {
+            handleStartLine(buffer);
+        }
+        else
+        {
+            parseEachLine(section);
+        }
+        buffer = buffer.substr(pos + 2 , buffer.size() - 1);
+        num++;
+
+    }
+    
+   // return buffer;
 
 }
 
