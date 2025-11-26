@@ -5,19 +5,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
-
-// methods
-enum Method
-{
-    GET,
-    POST,
-    PUT,
-    DELETE,
-    PATCH,
-    HEAD,
-    UNKNOWN,
-    ERROR
-};
+#include "../include/inc.h"
 
 /*
  * Request class handles the parsing and storage of HTTP request headers.
@@ -27,7 +15,7 @@ enum Method
  */
 class Request
 {
-private:
+public:
     // all headers info
     std::unordered_map<std::string, std::string> header;
 
@@ -43,7 +31,6 @@ private:
     // to handle stream data
     bool is_chunked = false;
 
-public:
     /*
         parse the request start line
         @param request only the first line

@@ -16,8 +16,8 @@ private:
 
 public:
     Router();
-    void addRoute(std::string path, std::function<void(std::unordered_map<std::string, std::string>&)> handler);
-    void handleRequest(std::string path);
+    void addRoute(Method method , std::string path, std::function<void(std::unordered_map<std::string, std::string>&)> handler);
+    void handleRequest(Method method , std::string path);
     void setDefaultHandler(std::function<void(std::unordered_map<std::string, std::string>&)> handler);
     void notFoundHandler();
 

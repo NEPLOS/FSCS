@@ -11,18 +11,18 @@ void Router::notFoundHandler()
     std::cout << "404 Not Found\n";
 };
 
-void Router::addRoute(std::string path , std::function<void(std::unordered_map<std::string, std::string>&)> handler)
+void Router::addRoute(Method method , std::string path , std::function<void(std::unordered_map<std::string, std::string>&)> handler)
 {
-    trie.insertNode(path, handler);
+    trie.insertNode(method , path, handler);
 }
 
-void Router::handleRequest(std::string path)
+void Router::handleRequest(Method method , std::string path)
 {
     std::unordered_map<std::string, std::string> params;
     Node *node = trie.selectedPath(path, params);
-    if (node && node->handler)
+    if (node && (node->handler.find(method) != node->handler.end()))
     {
-        node->handler(params);
+        node->handler[method](params);
     }
     else
         notFoundHandler();

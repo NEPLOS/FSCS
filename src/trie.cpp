@@ -16,7 +16,7 @@ void Trie::tokenize(std::string &str, std::vector<std::string> &tokens)
     }
 }
 
-Node::Node(std::string &d) : data(d), handler(nullptr)
+Node::Node(std::string &d) : data(d)
 {
     isdynamic = (!d.empty() && d.front() == '{' && d.back() == '}');
 }
@@ -55,7 +55,7 @@ Trie::Trie()
     head = new Node(temp);
 }
 
-void Trie::insertNode(std::string &path, std::function<void(std::unordered_map<std::string, std::string> &)> func)
+void Trie::insertNode(Method method , std::string &path, std::function<void(std::unordered_map<std::string, std::string> &)> func)
 {
     std::vector<std::string> tokens;
     tokenize(path, tokens);
@@ -75,10 +75,10 @@ void Trie::insertNode(std::string &path, std::function<void(std::unordered_map<s
 
         current = next;
     }
-    current->handler = func;
+    current->handler[method] = func;
 }
 
-Node *Trie::selectedPath(std::string &path, std::unordered_map<std::string, std::string> &params)
+Node* Trie::selectedPath(std::string &path, std::unordered_map<std::string, std::string> &params)
 {
     std::vector<std::string> tokens;
     tokenize(path, tokens);
