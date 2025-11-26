@@ -26,7 +26,9 @@ class MySQLConnection
 
     MYSQL *con;
 
-    /*
+    /*----------------------------------------------------------------------------------------------------------------------------------*/
+
+    /**
      * constructor
      * @param server your server IP address
      * @param user mostly root but yeah....user
@@ -35,20 +37,35 @@ class MySQLConnection
      */
     MySQLConnection(std::string server , std::string user , std::string password , std::string databse);
 
+    /*----------------------------------------------------------------------------------------------------------------------------------*/
+
     // setting up the connection to the server
     void mysqlConnectionSetUp();
+
+    /*----------------------------------------------------------------------------------------------------------------------------------*/
     
-    // executes the query to the server (syntax error in the ```query``` can cause a runtime error)
+    /**
+     *    
+     * @brief executes the query to the server
+     * 
+     * @warning syntax error in the ```query``` can cause runtime errors
+     * 
+     * @param query your query 
+     */
     MYSQL_RES* mysqlExecuteQuery(std::string query);
 
-    /*
-        free results from memory and prevents memory leaks
+    /*----------------------------------------------------------------------------------------------------------------------------------*/
 
-        @warning
-        use is function when you no longer need the result of the query , not using this function can cause 
-        memory leaks in your program
-    */
+    /**
+     * @brief free results from memory and prevents memory leaks
+     *
+     * @warning
+     * use is function when you no longer need the result of the query , not using this function can cause 
+     * memory leaks in your program
+     */
     void mysqlFreeResultFromMemory(MYSQL_RES* res);
+
+    /*----------------------------------------------------------------------------------------------------------------------------------*/
     
 
 };
