@@ -22,6 +22,32 @@ This is a **LEARNING-FOCUSED project**, experimenting with modern C++ and server
 
 ---
 
+## 📂 Project Structure
+
+```
+.
+├── include
+│   ├── inc.h
+│   ├── MySql.h
+│   ├── request.h
+│   ├── router.h
+│   └── trie.h
+├── lib
+├── Makefile
+├── output
+├── README.md
+└── src
+    ├── main.cpp
+    ├── MySql.cpp
+    ├── request.cpp
+    ├── router.cpp
+    └── trie.cpp
+
+```
+
+
+---
+
 ## 🔹 Current Phase
 
 FSCS is currently building the **foundational backend components**, including:
