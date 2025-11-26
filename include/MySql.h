@@ -1,7 +1,7 @@
 
 
-#ifndef MYSQL_CONNECTION_H
-#define MYSQL_CONNECTION_H
+#ifndef MY_MYSQL_CONNECTION_H
+#define MY_MYSQL_CONNECTION_H
 
 
 #include <string>

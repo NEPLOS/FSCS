@@ -1,6 +1,6 @@
 
-#ifndef ROUTER_H
-#define ROUTER_H
+#ifndef MY_ROUTER_H
+#define MY_ROUTER_H
 
 #include <string>
 #include <vector>
@@ -20,6 +20,9 @@ public:
     void handleRequest(std::string path);
     void setDefaultHandler(std::function<void(std::unordered_map<std::string, std::string>&)> handler);
     void notFoundHandler();
+
+    void printAllRoutes();
+
 };
 
 void notFoundHandler();

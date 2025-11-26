@@ -1,6 +1,6 @@
 
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef MY_HEADER_REQUEST_HANDLER_H
+#define MY_HEADER_REQUEST_HANDLER_H
 
 #include <iostream>
 #include <unordered_map>

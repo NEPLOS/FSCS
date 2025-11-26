@@ -23,20 +23,19 @@ void Router::handleRequest(std::string path)
     if (node && node->handler)
     {
         node->handler(params);
-
-        if (!params.empty())
-        {
-            // std::cout << "Params:\n";
-            // for (auto &kv : params)
-                // std::cout << kv.first << " = " << kv.second << "\n";
-        }
     }
     else
         notFoundHandler();
-        //defaulHandler();
 }
 
 void Router::setDefaultHandler(std::function<void(std::unordered_map<std::string, std::string>&)> handler)
 {
-    notFoundHandler();//defaulHandler = handler;
+    notFoundHandler();
 }
+
+void Router::printAllRoutes()
+{
+    std::cout << trie.head->data <<'\n';
+    trie.printTrie(trie.head);
+}
+

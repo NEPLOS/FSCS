@@ -1,18 +1,17 @@
 #include <iostream>
 #include "../include/request.h"
-#include "router.h"
-
-void homeHandler(std::unordered_map<std::string , std::string>& prams)
-{
-    std::cout << "hello\n";
-}
+#include "../include/router.h"
+#include "../include/MySql.h"
 
 int main(int argc, char *argv[])
 {
-
-
-
     Router router;
+
+    router.addRoute("/home/setting" , [](std::unordered_map<std::string , std::string>& prams){
+
+        std::cout << "hello from setting \n";
+
+    });
 
     router.addRoute("/home/{test}", [](std::unordered_map<std::string , std::string>& prams)
     {
@@ -21,44 +20,25 @@ int main(int argc, char *argv[])
 
     });
 
-    router.handleRequest("/home/salam");
+    router.addRoute("/home/{test}/{test2}", [](std::unordered_map<std::string , std::string>& prams)
+    {
+        std::string t = prams["test"];
+        std::string t2 = prams["test2"];
+        std::cout << t << "-" << t2 << "\n";
 
-    // router.addRoute("/user/login", homeHandler);
-    // router.addRoute("/user/{id}", userHandler);
-    // router.addRoute("/post/{postId}/comment/{commentId}", postCommentHandler);
-// 
+    });
+
+    router.addRoute("/{userName}/{setting}", [](std::unordered_map<std::string , std::string>& prams)
+    {
+        std::string t = prams["userName"];
+        std::string tt = prams["setting"];
+        std::cout << "user name = " << t << " - other shit : " << tt << "\n";
+
+    });
+
+    router.handleRequest("home/NEPLOS/oijhgq[h]");
+    router.handleRequest("home/NEPLOS");
 
 
 
 }
-    // std::cout << "beeg boom" << std::endl;
-
-    // Request req;
-
-    // std::string buffer = "GET /login HTTP/1.1\r\nHOST: mozila\r\nAccount: test\r\n\r\nbody\r\n"; 
-
-    // std::cout << "request : \n------\n" << buffer << "------\n";
-
-    // /*
-    //     MySQLConnection db("localhost" , "root" , "Parham_1" , "new_schema");
-
-    //     res = db.mysqlExecuteQuery("SELECT * FROM user;");
-
-
-    //     while ((db.row = mysql_fetch_row(db.res)) != NULL)
-    //     {
-    //         std::cout << db.row[1] << " - " << db.row[2] << '\n';
-    //     }
-    // */
-
-    // req.parseBuffer(buffer);
-
-    // // req.handleStartLine("GET / HTTP/1.1\r\n");
-    // // req.parseEachLine("HOST: mozila");
-    // // req.parseEachLine("Accept: */*");
-    // // req.parseEachLine("Content-Length: 12");
-    // // req.parseEachLine("User-Agent: curl/8.6.0");
-
-    // std::cout << "buffer ->" << buffer << '\n';
-    // req.printHeader();
-

@@ -1,10 +1,11 @@
 
-#include "trie.h"
+#include "../include/trie.h"
 #include <sstream>
 #include <iostream>
 
+std::string tabs = "\t";
 
-void Trie::tokenize(std::string& str, std::vector<std::string>& tokens)
+void Trie::tokenize(std::string &str, std::vector<std::string> &tokens)
 {
     std::stringstream ss(str);
     std::string part;
@@ -15,27 +16,36 @@ void Trie::tokenize(std::string& str, std::vector<std::string>& tokens)
     }
 }
 
-Node::Node(std::string& d) : data(d), handler(nullptr)
+Node::Node(std::string &d) : data(d), handler(nullptr)
 {
     isdynamic = (!d.empty() && d.front() == '{' && d.back() == '}');
 }
 
-Node* Node::getChild(std::string token, Node *&dynamicNode)
+Node *Node::getChild(std::string token, Node *&dynamicNode)
 {
     dynamicNode = nullptr;
+
     for (Node *child : children)
     {
         if (!child->isdynamic && child->data == token)
+        {
             return child;
+        }
     }
+
     for (Node *child : children)
     {
         if (child->isdynamic)
         {
+            if (child->data == token)
+            {
+                dynamicNode = child;
+                return child;
+            }
             dynamicNode = child;
-            break;
         }
     }
+
     return nullptr;
 }
 
@@ -45,34 +55,36 @@ Trie::Trie()
     head = new Node(temp);
 }
 
-void Trie::insertNode(std::string& path, std::function<void(std::unordered_map<std::string, std::string>&)> func)
+void Trie::insertNode(std::string &path, std::function<void(std::unordered_map<std::string, std::string> &)> func)
 {
     std::vector<std::string> tokens;
     tokenize(path, tokens);
 
     Node *current = head;
-    for (std::string& tk : tokens)
+    for (std::string &tk : tokens)
     {
         Node *next = nullptr;
         Node *dynamicNode = nullptr;
         next = current->getChild(tk, dynamicNode);
+
         if (!next)
         {
             next = new Node(tk);
             current->children.push_back(next);
         }
+
         current = next;
     }
     current->handler = func;
 }
 
-Node* Trie::selectedPath(std::string &path, std::unordered_map<std::string, std::string> &params)
+Node *Trie::selectedPath(std::string &path, std::unordered_map<std::string, std::string> &params)
 {
     std::vector<std::string> tokens;
     tokenize(path, tokens);
 
     Node *current = head;
-    for (std::string& tk : tokens)
+    for (std::string &tk : tokens)
     {
         Node *dynamicNode = nullptr;
         Node *next = current->getChild(tk, dynamicNode);
@@ -82,7 +94,7 @@ Node* Trie::selectedPath(std::string &path, std::unordered_map<std::string, std:
             if (dynamicNode)
             {
                 next = dynamicNode;
-                params[next->data.substr(1, next->data.size() - 2)] = tk; // strip {}
+                params[next->data.substr(1, next->data.size() - 2)] = tk;
             }
             else
             {
@@ -92,4 +104,16 @@ Node* Trie::selectedPath(std::string &path, std::unordered_map<std::string, std:
         current = next;
     }
     return current;
+}
+
+void Trie::printTrie(Node *node)
+{
+    // std::cout << tabs << node->data;
+    tabs += "\t";
+    for (size_t i = 0; i < node->children.size(); i++)
+    {
+        std::cout << tabs << node->children[i]->data << '\n';
+        printTrie(node->children[i]);
+    }
+    tabs.pop_back();
 }
