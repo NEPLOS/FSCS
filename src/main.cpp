@@ -3,29 +3,31 @@
 #include "../include/router.h"
 #include "../include/MySql.h"
 
+typedef std::unordered_map<std::string , std::string> Params;
+
 int main(int argc, char *argv[])
 {
     Router router;
 
-    router.addRoute( GET , "/home/setting" , [](std::unordered_map<std::string , std::string>& prams){
+    router.addRoute(GET , "/home/setting" , [](Params& prams){
 
         std::cout << "hello from /home/setting , method : GET \n";
 
     });
-    router.addRoute( POST ,  "/home/setting" , [](std::unordered_map<std::string , std::string>& prams){
+    router.addRoute(POST ,  "/home/setting" , [](Params& prams){
 
         std::cout << "hello from /home/setting , method : POST \n";
 
     });
 
-    router.addRoute( GET ,  "/home/{test}", [](std::unordered_map<std::string , std::string>& prams)
+    router.addRoute(GET ,  "/home/{test}", [](Params& prams)
     {
         std::string t = prams["test"];
         std::cout << "hello from /home/{test}  , method : GET , pram : " << t << "\n";
 
     });
 
-    router.addRoute(GET , "/home/{test}/{test2}", [](std::unordered_map<std::string , std::string>& prams)
+    router.addRoute(GET , "/home/{test}/{test2}", [](Params& prams)
     {
         std::string t = prams["test"];
         std::string t2 = prams["test2"];
@@ -33,7 +35,7 @@ int main(int argc, char *argv[])
 
     });
 
-    router.addRoute(GET , "/{userName}/{setting}", [](std::unordered_map<std::string , std::string>& prams)
+    router.addRoute(GET , "/{userName}/{setting}", [](Params& prams)
     {
         std::string t = prams["userName"];
         std::string tt = prams["setting"];
@@ -41,7 +43,7 @@ int main(int argc, char *argv[])
 
     });
 
-    router.addRoute(GET , "/support", [](std::unordered_map<std::string , std::string>& prams)
+    router.addRoute(GET , "/support", [](Params& prams)
     {
         // std::string t = prams["userName"];
         // std::string tt = prams["setting"];
@@ -51,7 +53,8 @@ int main(int argc, char *argv[])
 
     });
 
-    router.addRoute(GET , "/", [](std::unordered_map<std::string , std::string>& prams)
+
+    router.addRoute(GET , "/", [](Params& prams)
     {
         // std::string t = prams["userName"];
         // std::string tt = prams["setting"];
@@ -61,15 +64,24 @@ int main(int argc, char *argv[])
 
     });
 
+
+    router.addRoute(GET , "/FSCS", [](Params& prams)
+    {
+
+        std::cout << "--- welcome to our mini cloud server FSCS ---\n";
+
+    });
+
     Request usersRequest;
 
-    std::string req = "GET /home/FSCS HTTP/1.1\r\n"
+    std::string req = "GET /home/{test} HTTP/1.1\r\n"
                       "Host: example.com\r\n"
+                      "Token: iuahepouharo\r\n"
                       "Accept: */*\r\n";              
 
     usersRequest.parseBuffer(req);
 
-    router.handleRequest(GET , "/home/fwat4a");
+    router.handleRequest(usersRequest.method , usersRequest.path);
 
     // router.handleRequest("home/NEPLOS/oijhgq[h]");
     // router.handleRequest("home/NEPLOS");

@@ -52,12 +52,12 @@ public:
     /*----------------------------------------------------------------------------------------------------------------------------------*/
 
     /**
-    
-        @brief print all registered routes for debugging or inspection.
-
-        outputs the trie structure 
-
-    */
+     *
+     *   @brief print all registered routes for debugging or inspection.
+     *
+     *   outputs the trie structure 
+     *
+     */
     void printAllRoutes();
 
     /*----------------------------------------------------------------------------------------------------------------------------------*/

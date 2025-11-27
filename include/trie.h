@@ -16,7 +16,20 @@ class Node
     
     std::string data;
     bool isdynamic;
+    
+    /*
+        TODO :
+        change vector to map 
+        due to the iteration in the vector it will get slower by registering a new route
+        
+        yeah sure it will use more ram with map but it will be O(1) instead of O(n)
+
+
+    */
     std::vector<Node*> children;
+
+
+
     //std::function<void(std::unordered_map<std::string, std::string>&)> handler;
 
     std::unordered_map<Method , std::function<void(std::unordered_map<std::string, std::string>&)>> handler;
@@ -25,7 +38,6 @@ class Node
     
     Node* getChild(std::string token, Node*&dynamicNode);
 };
-
 
 
 class Trie

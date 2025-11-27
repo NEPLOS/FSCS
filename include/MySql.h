@@ -9,7 +9,7 @@
 #include <mysql/mysql.h>
 #include <unordered_map>
 
-/*
+/**
  *   basic MYSQL handler
  *
  *   @warning 
