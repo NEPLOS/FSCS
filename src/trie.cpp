@@ -55,7 +55,7 @@ Trie::Trie()
     head = new Node(temp);
 }
 
-void Trie::insertNode(Method method , std::string &path, std::function<void(std::unordered_map<std::string, std::string> &)> func)
+void Trie::insertNode(Method method , std::string &path, std::function<std::string(std::unordered_map<std::string, std::string> &)> func)
 {
     std::vector<std::string> tokens;
     tokenize(path, tokens);

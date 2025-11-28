@@ -63,7 +63,8 @@ void Request::parseBuffer(std::string& buffer)
 
         if (pos == 0)
         {
-            buffer = buffer.substr(pos + 2 , buffer.size() - 1);
+            buffer = "\r\n" + buffer;
+            //buffer = buffer.substr(pos + 2 , buffer.size() - 1);
             break;
         }
         

@@ -32,7 +32,7 @@ class Node
 
     //std::function<void(std::unordered_map<std::string, std::string>&)> handler;
 
-    std::unordered_map<Method , std::function<void(std::unordered_map<std::string, std::string>&)>> handler;
+    std::unordered_map<Method , std::function<std::string(std::unordered_map<std::string, std::string>&)>> handler;
 
     Node(std::string&d);
     
@@ -47,7 +47,7 @@ class Trie
     Trie();
     
     void tokenize(std::string &str, std::vector<std::string> &tokens);
-    void insertNode(Method method , std::string& path, std::function<void(std::unordered_map<std::string, std::string>&)> handler);
+    void insertNode(Method method , std::string& path, std::function<std::string(std::unordered_map<std::string, std::string>&)> handler);
     Node *selectedPath(std::string& path, std::unordered_map<std::string, std::string> &params);
     void printTrie(Node* node);
 };

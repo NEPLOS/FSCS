@@ -8,6 +8,7 @@
 #include <iostream>
 #include "trie.h"
 
+typedef std::unordered_map<std::string , std::string> Params;
 
 // a basic router
 class Router
@@ -29,7 +30,7 @@ public:
      *  @param path     the URL pattern to register
      *  @param handler  the function to execute when this route matches
      */
-    void addRoute(Method method , std::string path, std::function<void(std::unordered_map<std::string, std::string>&)> handler);
+    void addRoute(Method method , std::string path, std::function<std::string(std::unordered_map<std::string, std::string>&)> handler);
 
     /*----------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -39,11 +40,11 @@ public:
      * @param method the request HTTP method
      * @param path the request path
      */
-    void handleRequest(Method method , std::string path);
+    std::string handleRequest(Method method , std::string path);
 
     /*----------------------------------------------------------------------------------------------------------------------------------*/
 
-    void setDefaultHandler(std::function<void(std::unordered_map<std::string, std::string>&)> handler);
+    void setDefaultHandler(std::function<std::string(std::unordered_map<std::string, std::string>&)> handler);
 
     /*----------------------------------------------------------------------------------------------------------------------------------*/
 

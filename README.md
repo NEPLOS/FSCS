@@ -56,6 +56,9 @@ FSCS is currently building the **foundational backend components**, including:
   - Handles static and dynamic routes with parameter extraction  
 - **MySQL database integration**  
   - Basic connection and query execution (will integrate with routing later)  
+- **Single-threaded server**  
+  - Fully functional for now...almost; demonstrates that routing works and can be tested via a browser
+  - Handles requests sequentially, leaving room to expand to multi-threaded or async in the future
 - **Multi-phase architecture**  
   - Designed to grow into a complete cloud server platform  
 
