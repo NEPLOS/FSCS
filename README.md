@@ -31,6 +31,7 @@ This is a **LEARNING-FOCUSED project**, experimenting with modern C++ and server
 │   ├── MySql.h
 │   ├── request.h
 │   ├── router.h
+│   ├── server.h
 │   └── trie.h
 ├── lib
 ├── Makefile
@@ -41,7 +42,9 @@ This is a **LEARNING-FOCUSED project**, experimenting with modern C++ and server
     ├── MySql.cpp
     ├── request.cpp
     ├── router.cpp
+    ├── server.cpp
     └── trie.cpp
+
 
 ```
 
